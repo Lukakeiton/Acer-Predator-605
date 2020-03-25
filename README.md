@@ -84,3 +84,11 @@ In Device section, select "Inject", "Add ClockID", "FixOwnership" and "HighCurre
 In Rt Variables section, set BooterConfig to "0x28" and CsrActiveConfig to "0x67".
 
 Now, save it and reboot. That's all.
+
+IF YOU WANT TO ADD WINDOWS PARTITION TO CLOVER
+
+Mount EFI.
+
+Go to EFI/BOOT , copy BOOTX64.efi and paste it to EFI/Windows/Boot. Rename it to bootmgfw.efi.
+
+Now, power off the PC, connect the SSD with Windows and enter BIOS configuration. Select First HD Boot to the one where Mac OS is installed, save changes and reboot. That's all.
