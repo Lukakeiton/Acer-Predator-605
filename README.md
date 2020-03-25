@@ -46,7 +46,7 @@ Once you have installed the OS, boot from USB again to enter Mac OS Catalina. Do
 
 https://github.com/CloverHackyColor/CloverBootloader/releases
 
-Install it on the SSD with these options:
+Install it on the SSD with these added options, rest marked as are:
 
 - ApfsDriverLoader
 - AptioInputFix
