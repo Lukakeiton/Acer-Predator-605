@@ -76,8 +76,11 @@ DO NOT REBOOT. After installation is complete, you will need to install some kex
 Also, you have to download Clover Configurator (CC). Mount EFI partition, disable SIP and install the kexts in Library/Extensions with Clover Configurator. Now, select the config.plist file from home CC.
 
 In ACPI section, add "change GFX0 to IGPU", "change HECI to IMEI" and "change PEGP to GFX0" patches.
+
 In Boot section, add "dart=0", "nv-disable=1" and "-cdfon" in Arguments subsection.
+
 In Device section, select "Inject", "Add ClockID", "FixOwnership" and "HighCurrent" in USB subsection. Also, in Audio subsection, set to "15" Inject and tick "ResetHDA".
+
 In Rt Variables section, set BooterConfig to "0x28" and CsrActiveConfig to "0x67".
 
 Now, save it and reboot. That's all.
