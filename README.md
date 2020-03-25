@@ -73,6 +73,10 @@ DO NOT REBOOT. After installation is complete, you will need to install some kex
 - BrcmBluetoothInjector
 - VoodooPS2Controller
 
+You can download the kexts I use from:
+
+https://mega.nz/#!EIZ2yCII!i32sAzlJ98fFFl8Qri37F8JeYiHxEZypgbQg2r1Dkf8
+
 Also, you have to download Clover Configurator (CC). Mount EFI partition, disable SIP and install the kexts in Library/Extensions with Clover Configurator. Now, select the config.plist file from home CC.
 
 In ACPI section, add "change GFX0 to IGPU", "change HECI to IMEI" and "change PEGP to GFX0" patches.
