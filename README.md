@@ -35,6 +35,7 @@ To access BIOS/UEFI Setup, press and hold Delete on a USB Keyboard while the sys
 - Save and exit.
 
 
+
 Now, press F12 or access BIOS/UEFI Setup to set boot priority USB.
 
 Once you have booted from the USB, Clover will appear. You have to select Mac OS Installer, wait a couple of minutes, then the installer will show.
