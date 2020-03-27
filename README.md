@@ -14,39 +14,56 @@ Specs:
 
 To do a double boot Windows 10 and Mac OS Catalina you have to install them separately. In other words, you can install each OS in the order you want, but you have to disconnect first the SSD to avoid boot corruptions. I installed first Windows, as an easy task it is. Then, I installed Mac OS Catalina with the SSD but Windows' one disconnected.
 
-Mac OS Catalina Installation
+Make USB Installer for Mac OS Catalina
 
-First of all, you will need to follow this tutorial to have a Mac OS installer:
+You will need:
+- 16GB USB or larger
+- Mac OS Catalina from App Store (or Software update)
+- Clover EFI pkg installer
+- Mac computer or hackintosh one
 
-https://www.tonymacx86.com/threads/unibeast-install-macos-catalina-on-any-supported-intel-based-pc.285366/
+Boot on you Mac or hackintosh, open Disk Utility and format the USB with name "MacOSInstaller" with HFS+ Journaled (Mac OS extended (Journaled)). Open terminal and type the next command:
 
-Once you have created the USB, you need to install it on SSD. First, BIOS specifications:
+sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MacOSInstaller
+
+Keep calm, over 30 minutes until finish job.
+
+Once is done, download the last pkg release from Clover EFI from:
+
+https://github.com/CloverHackyColor/CloverBootloader/releases
+
+Install Clover on the USB with these added options (customize button), rest marked as are:
+
+- ApfsDriverLoader
+- AptioInputFix
+- AudioDxe
+- DataHubDxe
+- Fat
+- FSInject
+- OsxAptioFixDrv
+- SMCHelper
+- VBoxHfs
+
+Once you have created the USB, copy the kexts I provided to EFI/CLOVER/kexts/Other. First, BIOS specifications:
 
 To access BIOS/UEFI Setup, press and hold Delete on a USB Keyboard while the system is booting up
 - Load Optimized Defaults
 - Set AHCI for HDD/SSD
-- If your CPU supports VT-d, disable it
-- If your system has CFG-Lock, disable it
-- If your system has Secure Boot Mode, disable it
-- Set OS Type to Other OS
-- If your system has IO Serial Port, disable it
-- Set XHCI Handoff to Enabled
-- If you have a 6 series or x58 system with AWARD BIOS, disable USB 3.0
+- Disable VT-d
+- Disable Secure Boot Mode
 - Save and exit.
 
-
-
-Now, press F12 or access BIOS/UEFI Setup to set boot priority USB.
+Now, press F12 or access BIOS/UEFI Setup to set boot priority to USB.
 
 Once you have booted from the USB, Clover will appear. You have to select Mac OS Installer, wait a couple of minutes, then the installer will show.
 
-Install Mac OS Catalina in the HDD/SSD you want.
+Open Disk Utility and format in HFS+ Jounaled the SSD or HDD. Close it.
 
-Once you have installed the OS, boot from USB again to enter Mac OS Catalina. Download Clover EFI from:
+Install Mac OS Catalina in the HDD/SSD. Multiple reboots, no matter, boot again from USB and choose Mac OS Installer from Clover.
 
-https://github.com/CloverHackyColor/CloverBootloader/releases
+Once you have installed the OS, boot from USB again to enter Mac OS Catalina. 
 
-Install it on the SSD with these added options, rest marked as are:
+Open again and install Clover on the SSD with these added options, rest marked as are:
 
 - ApfsDriverLoader
 - AptioInputFix
