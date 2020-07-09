@@ -1,4 +1,121 @@
 # Acer-Predator-605
+
+Español:
+
+Hackintosh para Acer Predator 605
+
+Bienvenidos a mi segundo hackintosh.
+
+Especificaciones:
+
+- Intel Core i7 4790
+- Placa base MS-7829 LGA1150
+- Sapphire Nitro+ Radeon RX 590 8GB GDDR5 UEFI
+- BCM94352HMB 802.11ac WiFi Bluetooth 867Mbps Wireless-AC WiFi + BT 4,0 half Mini PCI-E
+- SSD WDC WD10EZEX-21M2NA0 para Windows 10
+- SSD TCSUNBOW X3 480GB para Mac OS Catalina
+
+Para hacer un doble inicio de Windows 10 y Mac OS Catalina, tiene que instalarlos de forma independiente. En otras palabras, se puede instalar cada sistema operativo en cualquier orden, simplemente desconecte el disco duro en el que acaba de instalar para evitar problemas de inicio. Instalé Windows 10 primero, tan sencillo como lo es. Luego, instalé Mac os Catalina desenchufando el disco duro de Windows.
+
+Cómo hacer un instalador USB para Mac OS Catalina
+
+Se necesitará:
+- 16GB USB o de mayor capacidad
+- Mac OS Catalina de App Store (o una actualización de software)
+- Instalador de Clover EFI pkg
+- Un ordenador con mac o un hackintosh
+
+Encienda su Mac o hackintosh, abra Utilidad de Discos y formatee el USB con el nombre "MacOSInstaller" con el formato HFS+ Journaled (Mac OS extended (Journaled)). Abra la terminal y escriba el siguiente comando:
+
+sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MacOSInstaller
+
+Mantenga la calma, tardará 30 minutos en terminar.
+
+Una vez terminado, descargue la última versión pkg de Clover EFI desde:
+
+https://github.com/CloverHackyColor/CloverBootloader/releases
+
+Instale Clover en el USB con las siguientes opciones (botón de personalizr), deje el resto como está:
+
+- ApfsDriverLoader
+- AptioInputFix
+- AudioDxe
+- DataHubDxe
+- Fat
+- FSInject
+- OsxAptioFixDrv
+- SMCHelper
+- VBoxHfs
+
+Una vez haya creado el USB, copie los kexts prorpocionado en EFI/CLOVER/kexts/Other.Primero. la configuración de la BIOS:
+
+Para acceder a la configuración BIOS/UEFI, presione y mantenga la tecla suprimir en un teclado USB mientras el sistema está cargando
+- Load Optimized Defaults
+- Set AHCI for HDD/SSD
+- Disable VT-d
+- Disable Secure Boot Mode
+- Save and exit.
+
+Ahora, presione F12 or acceda a la configuración de la BIOS/UEFI para dar prioridad al inicio desde USB.
+
+Una vez se ejecute desde el USB, Clover aparecerá. Tiene que seleccionar Mac OS Installer, espere unos minutos, entonces el instalador aparecerá.
+
+Abra Utilidad de Discos y formatee el disco duro en HFS+ Jounaled. Ciérrelo.
+
+Instale Mac OS Catalina en el disco duro. Varios reininicios, sin importancia, se darán, inicie de nuevo desde el USB y eliga Mac OS Installer desde Clover.
+
+Una vez haya instalado el sistema operativo, inicie desde el USB una vez más para entrar en Mac OS Catalina. 
+
+Una vez ejecutado, instale Clover en el disco duro con las siguientes opciones, deje las demás como están:
+
+- ApfsDriverLoader
+- AptioInputFix
+- AudioDxe
+- DataHubDxe
+- Fat
+- FSInject
+- OsxAptioFixDrv
+- SMCHelper
+- VBoxHfs
+
+NO REINICIE. Despues de que termine la instalación, necesitará instalar algunos kexts (driver en Mac) para hacer que todo funcione. Para hacerlo, descargue la última versión de estos kexts:
+
+- AppleALC
+- Lilu
+- WhatEverGreen
+- FakeSMC
+- USBInjectAll
+- IntelMausiEthernet
+- FakePCIID
+- FakePCIID_Intel_HD_Graphics
+- FakePCIID_Broadcom_WiFi
+- BrcmPatchRAM2
+- BrcmFirmwareData
+- BrcmBluetoothInjector
+- VoodooPS2Controller
+
+También, tiene que descargar Clover Configurator (CC). Monte la partición EFI, descative el SIP y copie los anteriores kexts en Library/Extensions con Clover Configurator (CC). Ahora, seleccione el archivo config.plist desde el inicio de CC.
+
+En la sección de ACPI, añada los parches "change GFX0 to IGPU", "change HECI to IMEI" y "change PEGP to GFX0".
+
+En la sección de Boot, añada "dart=0", "nv-disable=1" y "-cdfon" en la subseción Arguments.
+
+En la sección Device, seleccione "Inject", "Add ClockID", "FixOwnership" y "HighCurrent" en la subsección USB. Además, en la subsección de Audio, escriba "15" donde pone Inject y marque "ResetHDA".
+
+En la sección Rt Variables, escriba en BooterConfig "0x28" y en CsrActiveConfig "0x67".
+
+Ahora, guárdelo y reinicie. Eso es todo.
+
+SI QUIERE AÑADIR LA PARTICIÓN DE WINDOWSA A CLOVER
+
+Monte la EFI.
+
+Vaya a EFI/BOOT, copie BOOTX64.efi y péguelo en EFI/Windows/Boot. Renombre el archivo anterior a bootmgfw.efi.
+
+Ahora, apague el PC, conecte el disco duro con Windows y entre en la configuración de la BIOS. Selecione como primer disco duro de arranque aquel donde Mac OS está instalado, guarde los cambios y reinicie. Eso es todo.
+
+English
+
 Hackintosh for Acer Predator 605
 
 Welcome everyone to my second hackintosh.
